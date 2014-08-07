@@ -2,7 +2,7 @@ package com.example
 
 import opsemantic.SmallStep._
 
-object Hello {
+object OpSemantic {
   def main(args: Array[String]): Unit = {
     val add =Add(Multiply(Number(1), Number(2)), Multiply(Number(3), Number(4)))
 
