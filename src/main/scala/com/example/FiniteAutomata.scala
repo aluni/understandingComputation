@@ -32,5 +32,37 @@ object FiniteAutomata {
     println(dfaDesign.isAccepted("baa"))
     println(dfaDesign.isAccepted("baba"))
 
+    val nfaRuleBook: FA.NFARuleBook = Map(
+      (1,'a') -> Set(1),
+      (1,'b') -> Set(1,2),
+      (2,'a') -> Set(3),
+      (2,'b') -> Set(3),
+      (3,'a') -> Set(4),
+      (3,'b') -> Set(4)
+    )
+
+    val nfa = FA.NFA(Set(1), Set(4), nfaRuleBook)
+    println({nfa.readCharacter('b') ; nfa.isAccepted })
+    println({nfa.readCharacter('a') ; nfa.isAccepted })
+    println({nfa.readCharacter('b') ; nfa.isAccepted })
+
+    val nfaDesign = FA.NFADesign(1, Set(4), nfaRuleBook)
+    println("nfaDesign")
+    println(nfaDesign.isAccepted("bab"))
+    println(nfaDesign.isAccepted("bbbbb"))
+    println(nfaDesign.isAccepted("bbaabb"))
+
+    val nfaRuleBool2: FA.NFARuleBook = Map(
+      (1,'-') -> Set(2,4),
+      (2,'a') -> Set(3),
+      (3,'a') -> Set(2),
+      (4,'a') -> Set(5),
+      (5,'a') -> Set(6),
+      (6,'a') -> Set(4)
+    )
+
+    val nfa2 =FA.NFA(Set(1), Set(2,4), nfaRuleBool2)
+
+    println(nfa2.followFreeMoves(Set(1)))
   }
 }
