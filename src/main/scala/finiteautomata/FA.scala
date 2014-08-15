@@ -4,9 +4,7 @@ import scala.util.{Try, Success, Failure}
 
 object FA {
 
-  type State = Int
-
-  type Rule = (State, Char) => State
+  type State = Any
 
   type RuleBook = Map[(State, Char) , State]
 
@@ -43,6 +41,7 @@ object FA {
         }
       }
     }
+
     def followFreeMoves(states: Set[State]): Set[State] = {
       val moreStates = nextStates('-')(states)
       if(moreStates.subsetOf(states))
@@ -52,10 +51,12 @@ object FA {
     }
 
     def isAccepted = currentStates.map(st => acceptStates.contains(st)).contains(true)
+
     def readCharacter(character: Char) {
-//      println("from: " + currentStates + " with " + character)
+      //println("from: " + currentStates + " with " + character)
+      currentStates = followFreeMoves(currentStates)
       currentStates = nextStates(character)()
-//      println("to: " + currentStates + " with " + character)
+      //println("to: " + currentStates + " with " + character)
     }
     def readString(str: String) {
       str.foreach(c => readCharacter(c))

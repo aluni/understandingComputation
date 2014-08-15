@@ -64,5 +64,59 @@ object FiniteAutomata {
     val nfa2 =FA.NFA(Set(1), Set(2,4), nfaRuleBool2)
 
     println(nfa2.followFreeMoves(Set(1)))
+
+    println(Regexp.Literal('a'))
+    println(Regexp.Concatenate(Regexp.Literal('a'), Regexp.Literal('b')))
+    println(Regexp.Choose(Regexp.Literal('a'), Regexp.Literal('b')))
+    println(Regexp.Repeat(Regexp.Literal('a')))
+    println("-------------")
+    val pattern = Regexp.Repeat(
+      Regexp.Choose(
+        Regexp.Concatenate(Regexp.Literal('a'), Regexp.Literal('b')),
+        Regexp.Literal('a'))
+      )
+
+    println(pattern)
+
+    val nfa3 = Regexp.Empty()
+
+    println(nfa3.matches(""))
+    println(nfa3.matches("a"))
+
+    val nfa4 = Regexp.Literal('a')
+
+    println(nfa4.matches(""))
+    println(nfa4.matches("a"))
+    println(nfa4.matches("b"))
+
+    val nfa5 = Regexp.Concatenate(Regexp.Literal('a'), Regexp.Literal('b'))
+    println(nfa5)
+    println(nfa5.matches("a"))
+    println(nfa5.matches("ab"))
+    println(nfa5.matches("abc"))
+
+    val nfa6 = Regexp.Concatenate(Regexp.Literal('a'), Regexp.Concatenate(Regexp.Literal('b'), Regexp.Literal('c')))
+    println(nfa6)
+    println(nfa6.matches("a"))
+    println(nfa6.matches("ab"))
+    println(nfa6.matches("abc"))
+
+    val nfa7 = Regexp.Choose(Regexp.Literal('a'), Regexp.Literal('b'))
+    println(nfa7)
+    println(nfa7.matches("a"))
+    println(nfa7.matches("b"))
+    println(nfa7.matches("ab"))
+    println(nfa7.matches("abc"))
+
+    val nfa8 = Regexp.Repeat(Regexp.Literal('a'))
+    println(nfa8)
+    println(nfa8.matches(""))
+    println(nfa8.matches("a"))
+    println(nfa8.matches("aa"))
+    println(nfa8.matches("aaa"))
+    println(nfa8.matches("b"))
+    println(nfa8.matches("ab"))
+    println(nfa8.matches("abc"))
+
   }
 }
